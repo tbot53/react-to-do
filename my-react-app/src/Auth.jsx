@@ -5,7 +5,9 @@ import Logo from '../src/assets/Do-Track-logo/logo-icon-light-transparent.png';
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [mode, setMode] = useState('signIn'); // "signIn" or "signUp"
+  const [mode, setMode] = useState('signIn'); 
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const signIn = async () => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -21,7 +23,6 @@ export default function Auth() {
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gradient-to-br from-[#0f172a] to-[#1e293b] px-4">
       <div className="bg-white shadow-2xl rounded-xl p-8 max-w-md w-full animate-fade-in">
-        {/* Logo & Title */}
         <div className="flex flex-col items-center mb-6">
           <img src={Logo} alt="Do Track Logo" className="w-14 h-14 object-contain mb-2" />
           <h1 className="text-2xl font-bold text-[#0ea5e9] tracking-wide">Do Track</h1>
@@ -59,12 +60,22 @@ export default function Auth() {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
             onChange={e => setEmail(e.target.value)}
           />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
-            onChange={e => setPassword(e.target.value)}
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+              onChange={e => setPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(prev => !prev)}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800"
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </button>
+          </div>
+
         </div>
 
         {/* Submit Button */}
