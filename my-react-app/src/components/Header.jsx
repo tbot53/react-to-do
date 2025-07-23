@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
+import Logo from '../assets/Do-Track-logo/logo-icon-light-transparent.png'
 
 const Header = ({user, onLogOut}) => {
     
   return (
     <>
         <header className="bg-gray-100 p-4 shadow-md flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">Task Manager</h1>
+           
+          <div className='flex flex-col space-y-1'>
+            
+            <div className='w-10 h-10'>
+              <img src={Logo} alt="Do Track Logo" className='w-full h-full object-contain' />
+            </div>
+            {/* <h1 className="text-lg font-bold text-[#8aecf3]">Do Track</h1>    */}
+
+          </div>
+          
           {user && (
             <div className='flex space-x-2 items-center'>
               <p className="text-lg">
