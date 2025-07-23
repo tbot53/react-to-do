@@ -5,7 +5,7 @@ const Header = ({ user, onLogOut }) => {
   return (
     <>
       <header className="bg-white shadow-md px-6 py-4 flex items-center justify-between">
-        {/* Left: Logo */}
+        
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10">
             <img
@@ -19,7 +19,7 @@ const Header = ({ user, onLogOut }) => {
           </h1>
         </div>
 
-        {/* Right: Welcome + Log Out */}
+        
         {user && (
           <div className="flex items-center space-x-4">
             <p className="text-gray-700 text-base sm:text-lg">
@@ -35,7 +35,7 @@ const Header = ({ user, onLogOut }) => {
         )}
       </header>
 
-      {/* Divider line */}
+      
       <div>
         <hr className="border-t border-gray-200" />
       </div>

@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 export default function Modal({ isOpen, onClose, children }) {
+  const modalRef = useRef();
+
   if (!isOpen) return null;
 
+  const handleBackdropClick = (e) => {
+    // Only close if the click is outside the modal box
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      onClose();
+    }
+  };
+
   return ReactDOM.createPortal(
-    <div className="fixed inset-0 bg-gray-100 bg-opacity-10 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-[#f8feff] p-6 rounded shadow-lg relative w-96 max-w-full">
-        <button 
+    <div
+      onClick={handleBackdropClick}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-md transition-all"
+    >
+      <div
+        ref={modalRef}
+        className="relative w-full max-w-md mx-4 bg-white rounded-2xl shadow-lg p-6 border border-gray-200 animate-fade-in-soft"
+      >
+        {/* Close Button */}
+        <button
           onClick={onClose}
-          className="  absolute top-2 right-2 text-gray-500 hover:text-black"
+          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 hover:scale-110 transition-all text-xl font-bold"
         >
           &times;
         </button>
-        {children}
+
+        {/* Modal Content */}
+        <div className="mt-2 text-gray-700">{children}</div>
       </div>
     </div>,
     document.getElementById('modal-root')
